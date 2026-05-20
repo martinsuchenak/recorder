@@ -2,6 +2,7 @@ import { createContext, useContext, useRef, useState } from 'react';
 
 import { RecordingModal } from 'components/RecordingModal';
 import { composeStreams } from 'services/composer';
+import { postToParent } from 'services/postMessage';
 
 import { useLayout } from './layout';
 import { useStreams } from './streams';
@@ -63,9 +64,11 @@ export const RecordingProvider = ({ children }: RecordingProviderProps) => {
 
       setRecordingBlob(blob);
       setIsModalOpen(true);
+      postToParent({ type: 'RECORDER_STOPPED' });
     };
 
     mediaRecorder.current.start();
+    postToParent({ type: 'RECORDER_STARTED' });
   };
 
   const stopRecording = () => {

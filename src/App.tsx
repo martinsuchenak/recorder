@@ -9,6 +9,7 @@ import { useMediaDevices } from 'contexts/mediaDevices';
 import { usePictureInPicture } from 'contexts/pictureInPicture';
 import { useStreams } from 'contexts/streams';
 import useKeyboardShorcut from 'hooks/useKeyboardShortcut';
+import useParentMessageListener from 'hooks/useParentMessageListener';
 
 import styles from './App.module.css';
 
@@ -25,6 +26,7 @@ const App = () => {
 
   useKeyboardShorcut('e', () => setCameraEnabled(!cameraEnabled));
   useKeyboardShorcut('d', () => setMicrophoneEnabled(!microphoneEnabled));
+  useParentMessageListener();
 
   return (
     <div
